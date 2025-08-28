@@ -9,11 +9,8 @@ import { errorHandler } from "./src/utils/errorHandler.js";
 import cors from "cors"
 import { attachUser } from "./src/utils/attachUser.js";
 import cookieParser from "cookie-parser"
-import path from "path";
 
-dotenv.config({ path: "./.env" }) // fixed usage
-
-const __dirname = path.resolve();
+dotenv.config({ path: "./.env" })
 
 const app = express();
 
@@ -32,18 +29,10 @@ app.use("/api/user",user_routes)
 app.use("/api/auth",auth_routes)
 app.use("/api/create",short_url)
 
-app.use(errorHandler)
-
-// Serve static files from frontend (only if you intend to serve frontend from backend)
-app.use(express.static(path.join(__dirname, "FRONTEND", "dist"))); // fixed join
-
-// Short URL redirect - must come AFTER static files but BEFORE catch-all
+// Short URL redirect route
 app.get("/:id", redirectFromShortUrl)
 
-// Catch-all for SPA routing - Express 5 requires '/(.*)' instead of '*'
-app.get("/(.*)", (req, res) => {
-    res.sendFile(path.join(__dirname, "FRONTEND", "dist", "index.html"));
-});
+app.use(errorHandler)
 
 const PORT = process.env.PORT || 5000;
 

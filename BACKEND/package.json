@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js",
-    "build": "npm install && npm install --prefix FRONTEND && npm run build --prefix FRONTEND",
+    "build": "echo \"Backend ready - no build step required\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
