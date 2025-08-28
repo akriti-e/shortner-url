@@ -9,17 +9,14 @@ import { errorHandler } from "./src/utils/errorHandler.js";
 import cors from "cors"
 import { attachUser } from "./src/utils/attachUser.js";
 import cookieParser from "cookie-parser"
-import path from "path";
 
 dotenv.config("./.env")
-
-const __dirname = path.resolve();
 
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173', // your React app
-    credentials: true // 👈 this allows cookies to be sent
+    origin: process.env.FRONTEND_URL || 'http://localhost:5173',
+    credentials: true
 }));
 
 app.use(express.json())
@@ -31,15 +28,11 @@ app.use(attachUser)
 app.use("/api/user",user_routes)
 app.use("/api/auth",auth_routes)
 app.use("/api/create",short_url)
+
+// Short URL redirect route
 app.get("/:id",redirectFromShortUrl)
 
 app.use(errorHandler)
-
-app.use(express.static(path.join(__dirname, '/FRONTEND/dist')));
-
-app.get('*', (req,res) => {
-    res.sendFile(path.join(__dirname, 'FRONTEND', 'dist', 'index.html'));
-});
 
 const PORT = process.env.PORT || 5000;
 
