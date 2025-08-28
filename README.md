@@ -21,9 +21,13 @@
 
 <div align="center">
 
-![URL Shortener Preview](./assets/images/app-preview.png)
+![URL Shortener App Preview](https://github.com/user-attachments/assets/0d0d8dbf-d0b2-4c79-a270-357c6f6ec43d)
 
-*✨ Clean, brutalist design with intuitive URL shortening interface*
+> 🚀 **Live Demo Available!** [Click here to see the app in action](https://shortner-url-wmao.onrender.com)
+> 
+> *✨ Features a clean, brutalist design with intuitive URL shortening interface*
+
+**Experience the lightning-fast URL shortening with beautiful brutalist design aesthetics**
 
 </div>
 
