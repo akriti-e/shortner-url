@@ -1,0 +1,20 @@
+{
+  "name": "url-shortener",
+  "version": "1.0.0",
+  "description": "A modern, full-stack URL shortener application",
+  "scripts": {
+    "start": "cd BACKEND && npm start",
+    "build": "cd BACKEND && npm install",
+    "install-backend": "cd BACKEND && npm install",
+    "install-frontend": "cd FRONTEND && npm install",
+    "dev-backend": "cd BACKEND && npm run dev",
+    "dev-frontend": "cd FRONTEND && npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/akriti-e/shortner-url"
+  },
+  "keywords": ["url-shortener", "react", "nodejs", "mongodb"],
+  "author": "",
+  "license": "ISC"
+}

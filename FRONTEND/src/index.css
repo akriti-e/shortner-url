@@ -1,0 +1,152 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: oklch(98% 0.02 60);
+  --secondary-background: oklch(100% 0 0);
+  --foreground: oklch(15% 0 0);
+  --main-foreground: oklch(0% 0 0);
+  --main: oklch(65% 0.18 260);
+  --border: oklch(15% 0 0);
+  --ring: oklch(15% 0 0);
+  --overlay: oklch(0% 0 0 / 0.8);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --chart-1: #4f46e5;
+  --chart-2: #ef4444;
+  --chart-3: #f59e0b;
+  --chart-4: #10b981;
+  --chart-5: #8b5cf6;
+  --chart-active-dot: #000;
+  --gradient-yellow: #fbbf24;
+  --gradient-purple: #8b5cf6;
+  --gradient-yellow-light: #fef3c7;
+  --gradient-purple-light: #ede9fe;
+}
+
+.dark {
+  --background: oklch(25% 0.05 270);
+  --secondary-background: oklch(20% 0.02 270);
+  --foreground: oklch(95% 0 0);
+  --main-foreground: oklch(0% 0 0);
+  --main: oklch(70% 0.15 260);
+  --border: oklch(95% 0 0);
+  --ring: oklch(95% 0 0);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --chart-1: #6366f1;
+  --chart-2: #f87171;
+  --chart-3: #fbbf24;
+  --chart-4: #34d399;
+  --chart-5: #a78bfa;
+  --chart-active-dot: #fff;
+  --gradient-yellow: #f59e0b;
+  --gradient-purple: #a78bfa;
+  --gradient-yellow-light: #451a03;
+  --gradient-purple-light: #3c1361;
+}
+
+@theme inline {
+  --color-main: var(--main);
+  --color-background: var(--background);
+  --color-secondary-background: var(--secondary-background);
+  --color-foreground: var(--foreground);
+  --color-main-foreground: var(--main-foreground);
+  --color-border: var(--border);
+  --color-overlay: var(--overlay);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-gradient-yellow: var(--gradient-yellow);
+  --color-gradient-purple: var(--gradient-purple);
+  --color-gradient-yellow-light: var(--gradient-yellow-light);
+  --color-gradient-purple-light: var(--gradient-purple-light);
+  --spacing-boxShadowX: 4px;
+  --spacing-boxShadowY: 4px;
+  --spacing-reverseBoxShadowX: -4px;
+  --spacing-reverseBoxShadowY: -4px;
+  --radius-base: 8px;
+  --shadow-shadow: var(--shadow);
+  --font-weight-base: 500;
+  --font-weight-heading: 700;
+}
+
+@layer base {
+  body {
+    @apply text-foreground font-base;
+    min-height: 100vh;
+    position: relative;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+
+  /* Custom scrollbar for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--gradient-yellow-light);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-base);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, var(--gradient-yellow), var(--gradient-purple));
+    border: 2px solid var(--border);
+    border-radius: var(--radius-base);
+    box-shadow: 2px 2px 0px 0px var(--border);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, var(--gradient-purple), var(--gradient-yellow));
+  }
+
+  /* Custom selection colors */
+  ::selection {
+    background: var(--gradient-yellow);
+    color: var(--main-foreground);
+  }
+}
+
+/* Custom animations */
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+.animate-gradient-shift {
+  animation: gradient-shift 15s ease infinite;
+}
+
+.animate-float {
+  animation: float 20s ease-in-out infinite;
+}
