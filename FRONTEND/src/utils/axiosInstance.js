@@ -1,7 +1,14 @@
 import axios from "axios"
 
+// Use environment variable or fallback based on environment
+const API_BASE_URL = import.meta.env.VITE_API_URL || 
+    (import.meta.env.PROD 
+        ? "https://shortner-url-backend-tg1w.onrender.com"  // Replace with your actual backend URL from Render
+        : "http://localhost:5000"
+    )
+
 const axiosInstance = axios.create({
-    baseURL:"http://localhost:3000",
+    baseURL: API_BASE_URL,
     timeout:10000, //10s
     withCredentials:true
 })

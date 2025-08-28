@@ -3,6 +3,13 @@ import React, { useState } from "react"
 import { useQuery } from "@tanstack/react-query"
 import { getAllUserUrls } from "../api/user.api"
 
+// Get the API base URL for short URL display
+const API_BASE_URL = import.meta.env.VITE_API_URL || 
+    (import.meta.env.PROD 
+        ? "https://your-backend-url.onrender.com"  // Replace with your actual backend URL
+        : "http://localhost:5000"
+    )
+
 const UserUrl = () => {
   const {
     data: urls,
@@ -93,12 +100,12 @@ const UserUrl = () => {
                 </td>
                 <td className="px-6 py-4 border-r-2 border-border">
                   <a
-                    href={`http://localhost:3000/${url.short_url}`}
+                    href={`${API_BASE_URL}/${url.short_url}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-main font-base hover:underline hover:underline-offset-4 decoration-2 decoration-main transition-all duration-200"
                   >
-                    {`localhost:3000/${url.short_url}`}
+                    {`${API_BASE_URL.replace('https://', '').replace('http://', '')}/${url.short_url}`}
                   </a>
                 </td>
                 <td className="px-6 py-4 border-r-2 border-border">
