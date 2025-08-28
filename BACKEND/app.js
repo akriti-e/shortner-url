@@ -11,15 +11,15 @@ import { attachUser } from "./src/utils/attachUser.js";
 import cookieParser from "cookie-parser"
 import path from "path";
 
-dotenv.config("./.env")
+dotenv.config({ path: "./.env" }) // fixed usage
 
 const __dirname = path.resolve();
 
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5173', // your React app
-    credentials: true // 👈 this allows cookies to be sent
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    credentials: true
 }));
 
 app.use(express.json())
@@ -34,15 +34,15 @@ app.use("/api/create",short_url)
 
 app.use(errorHandler)
 
-// Serve static files from frontend
-app.use(express.static(path.join(__dirname, '/FRONTEND/dist')));
+// Serve static files from frontend (only if you intend to serve frontend from backend)
+app.use(express.static(path.join(__dirname, "FRONTEND", "dist"))); // fixed join
 
 // Short URL redirect - must come AFTER static files but BEFORE catch-all
-app.get("/:id",redirectFromShortUrl)
+app.get("/:id", redirectFromShortUrl)
 
-// Catch-all handler for frontend routing - must be LAST
-app.get('*', (req,res) => {
-    res.sendFile(path.join(__dirname, 'FRONTEND', 'dist', 'index.html'));
+// Catch-all for SPA routing - Express 5 requires '/(.*)' instead of '*'
+app.get("/(.*)", (req, res) => {
+    res.sendFile(path.join(__dirname, "FRONTEND", "dist", "index.html"));
 });
 
 const PORT = process.env.PORT || 5000;
@@ -52,4 +52,4 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 })
 
-// GET - Redirection 
+// GET - Redirection
